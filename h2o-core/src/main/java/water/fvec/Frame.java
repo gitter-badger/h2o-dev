@@ -1102,6 +1102,7 @@ public class Frame extends Lockable<Frame> {
     VecCopyTask(H2O.H2OCountedCompleter cc, Vec from, Vec[] vecs, int i) { super(cc); _from=from; _vecs=vecs; _i=i; }
 
     @Override protected void compute2() {
+      // Blocking inside
       _vecs[_i] = _from.makeCopy(_from.domain());
       tryComplete();
     }

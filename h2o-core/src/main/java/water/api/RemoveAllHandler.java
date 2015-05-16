@@ -21,12 +21,8 @@ public class RemoveAllHandler extends Handler {
     @Override public byte priority() { return H2O.GUI_PRIORITY; }
 
     @Override public void setupLocal() {
-      final Set<Key> kys = H2O.localKeySet();
-      Log.info("Removing "+kys.size()+ " objects from nodeIdx("+H2O.SELF.index()+") out of "+H2O.CLOUD.size()+" nodes.");
-      Futures fs = new Futures();
-      for (Key k : kys)
-        DKV.remove(k, fs);
-      fs.blockForPending();
+      Log.info("Removing "+H2O.store_size()+ " objects from nodeIdx("+H2O.SELF.index()+") out of "+H2O.CLOUD.size()+" nodes.");
+      H2O.clearAll();
       Log.info("Objects remaining: "+H2O.store_size());
     }
   }

@@ -1032,6 +1032,15 @@ final public class H2O {
   // The (local) set of Key/Value mappings.
   static final NonBlockingHashMap<Key,Value> STORE = new NonBlockingHashMap<>();
 
+  /** Delete content of the store.
+   *
+   * @return  return size of store before delete. This is racy call! */
+  public static int clearAll() {
+    int size = STORE.size();
+    STORE.clear();
+    return size;
+  }
+
   // PutIfMatch
   // - Atomically update the STORE, returning the old Value on success
   // - Kick the persistence engine as needed

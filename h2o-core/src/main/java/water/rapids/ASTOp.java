@@ -2234,6 +2234,7 @@ class ASTCbind extends ASTUniPrefixOp {
     Frame fr = new Frame(new String[0],new Vec[0]);
     for(int i = 0; i < argcnt; i++) {
       Frame f = env.peekAryAt(i-argcnt+1);  // Reverse order off stack
+      // FIXME: avoid double copy
       Frame ff = _deepCopy ? f.deepCopy(null) : f; // deep copy the frame, R semantics...
       Frame new_frame = fr.makeCompatible(ff);
       if (f.numCols() == 1) fr.add(f.names()[0], new_frame.anyVec());
